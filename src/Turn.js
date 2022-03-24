@@ -11,17 +11,17 @@ class Turn {
   };
   evaluateGuess() {
     if(this.guess === this.card.correctAnswer) {
-      return true
+      return true;
     } else if(this.guess !== this.card.correctAnswer) {
-      return false
+      return false;
     };
   };
   giveFeedback() {
     if(this.evaluateGuess()) {
-      return 'correct!'
+      return 'correct!';
     } else if(!this.evaluateGuess()) {
-      return `incorrect!`
-    }
+      return `incorrect!`;
+    };
   };
 };
 module.exports = Turn;

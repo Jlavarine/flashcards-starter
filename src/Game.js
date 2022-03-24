@@ -20,24 +20,23 @@ class Game {
       util.main(round);
   };
   start() {
-    this.createCards()
-    this.createDeck()
-    this.createRound()
+    this.createCards();
+    this.createDeck();
+    this.createRound();
     this.printMessage(this.deck, this.round);
     this.printQuestion(this.round);
   };
   createCards() {
-    let cards = prototypeQuestions.map(obj => new Card(obj.id, obj.question, obj.answers, obj.correctAnswer))
-    this.cards = cards
+    let cards = prototypeQuestions.map(obj => new Card(obj.id, obj.question, obj.answers, obj.correctAnswer));
+    this.cards = cards;
   };
   createDeck() {
-    const deck = new Deck(this.cards)
+    const deck = new Deck(this.cards);
     this.deck = deck;
   };
   createRound() {
     const round = new Round(this.deck);
     this.round = round;
-  }
+  };
 };
-
 module.exports = Game;
