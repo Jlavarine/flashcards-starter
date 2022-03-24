@@ -33,11 +33,6 @@ describe('Round', function() {
   it('should return the current card being played', function() {
     expect(round.returnCurrentCard()).to.equal(card1)
   })
-  it('should create a new instance of turn', function() {
-    round.takeTurn()
-
-    expect(round.takeTurn()).to.be.an.instanceof(Turn)
-  })
   it('should increase the turns count for each turn', function() {
     round.takeTurn()
 
@@ -58,7 +53,7 @@ describe('Round', function() {
   it('should push the ID of the current card if the guess is incorrect', function() {
     expect(turn.guess).to.not.equal(round.currentCard.correctAnswer)
     round.takeTurn('my guess')
-    expect(round.incorrectGuesses[0]).to.equal(round.currentCard.id)
+    expect(round.incorrectGuesses.length).to.equal(1)
   })
   it('should calculate the percentage of correct guesses', function() {
     round.takeTurn('my guess')
@@ -66,6 +61,6 @@ describe('Round', function() {
   })
   it('should print the round over message to the console', function() {
     round.takeTurn('my guess')
-    expect(round.endRound()).to.equal(`** Round over! ** You answered <${round.calculatePercentageCorrect()}>% of the questions correctly!`)
+    expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentageCorrect()}% of the questions correctly!`)
   })
 });

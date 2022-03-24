@@ -3,29 +3,28 @@ class Round {
   constructor(deck) {
     this.deck = deck
     this.turns = 0;
-    this.currentCard = this.returnCurrentCard();
+    this.currentCard = deck.allCards[0];
     this.incorrectGuesses = []
   };
   returnCurrentCard() {
-    this.currentCard = this.deck.allCards[this.turns];
-    return this.currentCard
+    return this.deck.allCards[this.turns];
   };
   takeTurn(userGuess) {
     let newTurn = new Turn(userGuess, this.currentCard);
     newTurn.evaluateGuess()
-    this.turns += 1;
-    this.returnCurrentCard()
     if(newTurn.giveFeedback() === 'incorrect!') {
       this.incorrectGuesses.push(this.currentCard.id)
-    };
-    return newTurn;
+    }
+    this.turns += 1;
+    this.currentCard = this.returnCurrentCard()
+    return newTurn.giveFeedback();
   };
   calculatePercentageCorrect() {
     return this.incorrectGuesses.length / this.deck.allCards.length
   };
   endRound() {
-    console.log(`** Round over! ** You answered <${this.calculatePercentageCorrect()}>% of the questions correctly!`)
-    return  `** Round over! ** You answered <${this.calculatePercentageCorrect()}>% of the questions correctly!`
+    console.log(`** Round over! ** You answered ${this.calculatePercentageCorrect()}% of the questions correctly!`)
+    return  `** Round over! ** You answered ${this.calculatePercentageCorrect()}% of the questions correctly!`
   }
 };
 module.exports = Round;
