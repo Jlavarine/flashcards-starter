@@ -3,21 +3,20 @@ class Round {
   constructor(deck) {
     this.deck = deck
     this.turns = 0;
-    this.currentCard = this.returnCurrentCard();
+    this.currentCard = deck.allCards[0];
     this.incorrectGuesses = []
   };
   returnCurrentCard() {
-    this.currentCard = this.deck.allCards[this.turns];
-    return this.currentCard
+    return this.deck.allCards[this.turns];
   };
   takeTurn(userGuess) {
     let newTurn = new Turn(userGuess, this.currentCard);
     newTurn.evaluateGuess()
-    this.turns += 1;
-    this.returnCurrentCard()
     if(newTurn.giveFeedback() === 'incorrect!') {
       this.incorrectGuesses.push(this.currentCard.id)
     };
+    this.turns += 1;
+    this.currentCard = this.returnCurrentCard()
     return newTurn;
   };
   calculatePercentageCorrect() {

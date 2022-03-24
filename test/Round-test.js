@@ -58,7 +58,7 @@ describe('Round', function() {
   it('should push the ID of the current card if the guess is incorrect', function() {
     expect(turn.guess).to.not.equal(round.currentCard.correctAnswer)
     round.takeTurn('my guess')
-    expect(round.incorrectGuesses[0]).to.equal(round.currentCard.id)
+    expect(round.incorrectGuesses.length).to.equal(1)
   })
   it('should calculate the percentage of correct guesses', function() {
     round.takeTurn('my guess')
