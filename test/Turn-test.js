@@ -1,6 +1,5 @@
 const chai = require('chai');
 const expect = chai.expect;
-
 const Turn = require('../src/Turn');
 const Card = require('../src/Card');
 
@@ -21,37 +20,29 @@ describe('Turn', function() {
   });
   it('should be able to return the user\'s guess', function() {
     turn.returnGuess();
-
     expect(turn.returnGuess()).to.equal('My Guess');
   });
   it('should be able to return the current card', function() {
     turn.returnCard();
-
     expect(turn.returnCard()).to.equal(currentCard);
   });
   it('should be able to check if the user\s guess was correct', function() {
     turn.guess = 'object';
-
     turn.evaluateGuess();
-
     expect(turn.evaluateGuess()).to.equal(true);
   });
   it('should be able to check if the user\s guess was incorrect', function() {
     turn.evaluateGuess();
-
     expect(turn.evaluateGuess()).to.equal(false);
   });
   it('should be able to provide feedback if an answer is correct', function() {
     turn.guess = 'object';
-
     turn.evaluateGuess();
-
     expect(turn.evaluateGuess()).to.equal(true);
     expect(turn.giveFeedback()).to.equal('correct!');
   });
   it('should be able to provide feedback if an answer is correct', function() {
     turn.evaluateGuess();
-
     expect(turn.evaluateGuess()).to.equal(false);
     expect(turn.giveFeedback()).to.equal('incorrect!');
   });

@@ -6,14 +6,7 @@ const Round = require('../src/Round');
 const expect = chai.expect;
 
 describe('Round', function() {
-  let card1;
-  let card2;
-  let card3;
-  let deck;
-  let round;
-  let currentCard;
-  let turn;
-
+  let card1; let card2; let card3; let deck; let round; let currentCard; let turn;
   beforeEach(() => {
     card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
@@ -23,44 +16,50 @@ describe('Round', function() {
     currentCard = round.currentCard;
     turn = new Turn('my guess', currentCard);
   })
-
   it('should be a function', function() {
     expect(Round).to.be.a('function');
   });
-  it('should be an instance of Round', function() {
-    expect(round).to.be.an.instanceof(Round)
-  })
-  it('should return the current card being played', function() {
-    expect(round.returnCurrentCard()).to.equal(card1)
-  })
-  it('should increase the turns count for each turn', function() {
-    round.takeTurn()
 
-    expect(round.turns).to.equal(1)
-  })
+  it('should be an instance of Round', function() {
+    expect(round).to.be.an.instanceof(Round);
+  });
+
+  it('should return the current card being played', function() {
+    expect(round.returnCurrentCard()).to.equal(card1);
+  });
+
+  it('should increase the turns count for each turn', function() {
+    round.takeTurn();
+    expect(round.turns).to.equal(1);
+  });
+
   it('should have the next card become the current card', function() {
     round.takeTurn();
+    expect(round.currentCard).to.equal(round.deck.allCards[round.turns]);
+  });
 
-    expect(round.currentCard).to.equal(round.deck.allCards[round.turns])
-  })
   it('should evaluate if the user\s guess is correct', function() {
-    turn.guess = 'sea otter'
-    expect(turn.guess).to.equal(round.currentCard.correctAnswer)
-  })
+    turn.guess = 'sea otter';
+    expect(turn.guess).to.equal(round.currentCard.correctAnswer);
+  });
+
   it('should evaluate if the user\s guess is incorrect', function() {
-    expect(turn.guess).to.not.equal(round.currentCard.correctAnswer)
-  })
+    expect(turn.guess).to.not.equal(round.currentCard.correctAnswer);
+  });
+
   it('should push the ID of the current card if the guess is incorrect', function() {
-    expect(turn.guess).to.not.equal(round.currentCard.correctAnswer)
-    round.takeTurn('my guess')
-    expect(round.incorrectGuesses.length).to.equal(1)
-  })
+    expect(turn.guess).to.not.equal(round.currentCard.correctAnswer);
+    round.takeTurn('my guess');
+    expect(round.incorrectGuesses.length).to.equal(1);
+  });
+
   it('should calculate the percentage of correct guesses', function() {
-    round.takeTurn('my guess')
-    expect(round.calculatePercentageCorrect()).to.equal(round.incorrectGuesses.length / round.deck.allCards.length)
-  })
+    round.takeTurn('my guess');
+    expect(round.calculatePercentageCorrect()).to.equal((round.incorrectGuesses.length / round.deck.allCards.length) * 100);
+  });
+
   it('should print the round over message to the console', function() {
-    round.takeTurn('my guess')
-    expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentageCorrect()}% of the questions correctly!`)
-  })
+    round.takeTurn('my guess');
+    expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentageCorrect()}% of the questions correctly!`);
+  });
 });
