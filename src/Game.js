@@ -8,7 +8,9 @@ const Turn = require('../src/Turn');
 
 class Game {
   constructor() {
-    this.currentRound;
+    this.cards;
+    this.deck;
+    this.round;
   };
   printMessage(deck, round) {
     console.log(`Welcome to FlashCards! You are playing with ${deck.countCards()} cards.
@@ -18,13 +20,24 @@ class Game {
       util.main(round);
   };
   start() {
-    let cards = prototypeQuestions.map(obj => new Card(obj.id, obj.question, obj.answers, obj.correctAnswer))
-    const deck = new Deck(cards)
-    const round = new Round(deck)
-    this.currentRound = round;
-    // this.printMessage(deck, round);
-    // this.printQuestion(round);
+    this.createCards()
+    this.createDeck()
+    this.createRound()
+    this.printMessage(this.deck, this.round);
+    this.printQuestion(this.round);
   };
+  createCards() {
+    let cards = prototypeQuestions.map(obj => new Card(obj.id, obj.question, obj.answers, obj.correctAnswer))
+    this.cards = cards
+  };
+  createDeck() {
+    const deck = new Deck(this.cards)
+    this.deck = deck;
+  };
+  createRound() {
+    const round = new Round(this.deck);
+    this.round = round;
+  }
 };
 
 module.exports = Game;

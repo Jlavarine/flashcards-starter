@@ -14,17 +14,17 @@ class Round {
     newTurn.evaluateGuess()
     if(newTurn.giveFeedback() === 'incorrect!') {
       this.incorrectGuesses.push(this.currentCard.id)
-    };
+    }
     this.turns += 1;
     this.currentCard = this.returnCurrentCard()
-    return newTurn;
+    return newTurn.giveFeedback();
   };
   calculatePercentageCorrect() {
     return this.incorrectGuesses.length / this.deck.allCards.length
   };
   endRound() {
-    console.log(`** Round over! ** You answered <${this.calculatePercentageCorrect()}>% of the questions correctly!`)
-    return  `** Round over! ** You answered <${this.calculatePercentageCorrect()}>% of the questions correctly!`
+    console.log(`** Round over! ** You answered ${this.calculatePercentageCorrect()}% of the questions correctly!`)
+    return  `** Round over! ** You answered ${this.calculatePercentageCorrect()}% of the questions correctly!`
   }
 };
 module.exports = Round;

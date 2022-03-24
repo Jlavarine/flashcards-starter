@@ -17,6 +17,7 @@ describe('Game', function () {
   let currentCard;
 
   beforeEach(() => {
+    game = new Game();
     // game = new Game(deck,round);
     // round = new Round(deck);
     // turn = new Turn('my guess', currentCard);
@@ -28,28 +29,49 @@ describe('Game', function () {
   })
 
   it('should be a function', function() {
-    game = new Game();
 
     expect(Game).to.be.a('function');
   });
   it('should be an instance of Game', function() {
-    game = new Game();
 
     expect(game).to.be.an.instanceof(Game);
   });
-  it('should be able to track the current round', function() {
-    game = new Game();
-    game.start();
-    const round = new Round(deck)
+  it('should create an instance of cards', function() {
+    game.createCards()
 
-    expect(game.currentRound).to.equal(round);
+
+    expect(game.cards[0]).to.be.an.instanceof(Card);
   });
-  // it('should create cards', function() {
-  //   game = new Game(deck,round);
+  it('should create an instance of deck', function() {
+    cards = game.createCards()
+    game.createDeck()
+
+
+    expect(game.deck).to.be.an.instanceof(Deck);
+  });
+  it('should create an instance of round', function() {
+    cards = game.createCards()
+    deck = game.createDeck()
+    game.createRound()
+
+
+    expect(game.round).to.be.an.instanceof(Round);
+  });
+  // it('should create an instance of round', function() {
+  //   cards = game.createCards()
+  //   deck = game.createDeck()
+  //   game.createRound()
+  //   game.start()
   //
-  //   const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-  //   const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
-  //   const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
-  //   expect(game.start(card1)).to.equal(card1)
-  // })
+  //   expect(true).to.be.equal(true);
+  // });
+  // it('Should freaking work', function() {
+  //   cards = game.createCards()
+  //   deck = game.createDeck()
+  //   game.createRound()
+  //
+  //
+  //   expect(game.round).to.be.an.instanceof(Round);
+  // });
+
 });
