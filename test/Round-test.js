@@ -55,7 +55,7 @@ describe('Round', function() {
 
   it('should calculate the percentage of correct guesses', function() {
     round.takeTurn('my guess');
-    expect(round.calculatePercentageCorrect()).to.equal((round.incorrectGuesses.length / round.deck.allCards.length) * 100);
+    expect(round.calculatePercentageCorrect()).to.equal(((round.deck.allCards.length - round.incorrectGuesses.length) / round.deck.allCards.length) * 100);
   });
 
   it('should print the round over message to the console', function() {
